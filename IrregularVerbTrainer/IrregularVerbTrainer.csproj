@@ -2,12 +2,13 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net7.0-windows</TargetFramework>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<ApplicationIcon>..\IrregularVerbTrainer\bin\Release\net6.0-windows\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup>	
 		<ApplicationDefinition Include="Views\App.xaml">
 			<Generator>MSBuild:Compile</Generator>
 			<XamlRuntime>Wpf</XamlRuntime>
@@ -16,7 +17,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Saves\" />
+	  <PackageReference Include="Costura.Fody" Version="5.7.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

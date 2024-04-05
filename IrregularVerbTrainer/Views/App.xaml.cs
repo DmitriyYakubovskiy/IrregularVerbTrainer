@@ -10,7 +10,7 @@ namespace IrregularVerbTrainer.Views;
 /// </summary>
 public partial class App
 {
-    public static string path = @"..\..\..\Saves\irregularVerbs.xml";
+    public static string path = @"irregularVerbs.xml";
     
     public App()
     {
