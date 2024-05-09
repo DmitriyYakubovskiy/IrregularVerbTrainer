@@ -1,16 +1,15 @@
 ﻿using System.Windows;
 
-namespace IrregularVerbTrainer.Views
+namespace IrregularVerbTrainer.Views;
+
+/// <summary>
+/// Логика взаимодействия для IrregularVerbListView.xaml
+/// </summary>
+public partial class IrregularVerbListView : Window
 {
-    /// <summary>
-    /// Логика взаимодействия для IrregularVerbListView.xaml
-    /// </summary>
-    public partial class IrregularVerbListView : Window
+    public IrregularVerbListView(Window owner)
     {
-        public IrregularVerbListView(Window owner)
-        {
-            InitializeComponent();
-            Owner = owner;
-        }
+        InitializeComponent();
+        Owner = owner;
     }
 }

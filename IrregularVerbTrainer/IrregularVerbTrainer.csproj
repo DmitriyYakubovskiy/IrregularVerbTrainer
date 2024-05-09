@@ -2,10 +2,10 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<ApplicationIcon>..\IrregularVerbTrainer\bin\Release\net6.0-windows\Icon.ico</ApplicationIcon>
+		<ApplicationIcon>DataAccess\Resources\Images\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>	
@@ -17,10 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Costura.Fody" Version="5.7.0">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
+	  <Content Include="DataAccess\Resources\Images\Icon.ico" />
 	</ItemGroup>
 
 </Project>

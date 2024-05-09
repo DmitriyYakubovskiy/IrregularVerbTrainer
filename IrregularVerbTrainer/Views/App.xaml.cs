@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using IrregularVerbTrainer.Models;
 using IrregularVerbTrainer.ViewModels;
 using System.IO;
+using IrregularVerbTrainer.DataAccess.Models;
 
 namespace IrregularVerbTrainer.Views;
 
@@ -117,7 +117,7 @@ public partial class App
         verbsCollection.Add(new IrregularVerb("Посылать", "Send", "Sent", "Sent", 0));
         verbsCollection.Add(new IrregularVerb("Устанавливать", "Set", "Set", "Set", 0));
         verbsCollection.Add(new IrregularVerb("Шить", "Sew", "Sewed", "Sewn", 0));
-        verbsCollection.Add(new IrregularVerb("Трятси", "Shake", "Shook", "Shaken", 0));
+        verbsCollection.Add(new IrregularVerb("Трясти", "Shake", "Shook", "Shaken", 0));
         verbsCollection.Add(new IrregularVerb("Блестеть", "Shine", "Shone", "Shone", 0));
         verbsCollection.Add(new IrregularVerb("Стрелять", "Shoot", "Shot", "Shot", 0));
         verbsCollection.Add(new IrregularVerb("Показывать", "Show", "Showed", "Shown", 0));

@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="400">
+        Title="MainWindow" Height="350" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="Button">
@@ -57,7 +58,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringDifficult}"/>
             </Grid>
-            <Button Grid.Column="1" Grid.Row="1" FontSize="40" Content="Начать тест" Command="{Binding OpenTestCommand}"/>
+            <Button Grid.Column="1" Grid.Row="1" FontSize="40" Content="Начать тест" Command="{Binding OpenTestCommand}" Padding="10"/>
         </Grid>
     </Grid>
 </Window>

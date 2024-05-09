@@ -1,13 +1,12 @@
 ﻿using System.Windows;
 
-namespace IrregularVerbTrainer.Views
+namespace IrregularVerbTrainer.Views;
+
+public partial class TestView : Window
 {
-    public partial class TestView : Window
+    public TestView(Window owner)
     {
-        public TestView(Window owner)
-        {
-            InitializeComponent();
-            Owner = owner;
-        }
+        InitializeComponent();
+        Owner = owner;
     }
 }
