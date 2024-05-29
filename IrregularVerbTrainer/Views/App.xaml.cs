@@ -2,6 +2,7 @@
 using IrregularVerbTrainer.ViewModels;
 using System.IO;
 using IrregularVerbTrainer.DataAccess.Models;
+using System.Xml.Linq;
 
 namespace IrregularVerbTrainer.Views;
 
@@ -10,35 +11,54 @@ namespace IrregularVerbTrainer.Views;
 /// </summary>
 public partial class App
 {
-    public static string path = @"irregularVerbs.xml";
-    
+    private const string directoryName = @"Saves";
+    private const string path = @"IrregularVerbs.xml";
+    public const string sessionPath = @"sessionInfo.xml";
+    public static string currentPath;
+
     public App()
     {
-        ShutdownMode = ShutdownMode.OnMainWindowClose;
+        ShutdownMode = ShutdownMode.OnLastWindowClose;
     }
 
     protected override void OnStartup(StartupEventArgs e)
     {
-        
-        IrregularVerbCollection verbsCollection = new IrregularVerbCollection();
-
-        if(File.Exists(path))
+        if (File.Exists(sessionPath))
         {
-            verbsCollection.ReadFile(path);
+            string name = File.ReadAllText(sessionPath);
+            IrregularVerbCollection verbsCollection = GetIreggularVerbs(name);
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = new MainWindowViewModel(verbsCollection, mainWindow, name);
+            mainWindow.Show();
         }
         else
         {
-            File.Create(path).Close();
-            addVerbs(verbsCollection);
-            verbsCollection.ToFile(path);
+            var loginWindow = new LoginView();
+            loginWindow.DataContext = new LoginViewModel(loginWindow);
+            loginWindow.Show();
         }
-
-        var mainWindow = new MainWindow();
-        mainWindow.DataContext = new MainWindowViewModel(verbsCollection,mainWindow);
-        mainWindow.Show();
     }
 
-    private void addVerbs(IrregularVerbCollection verbsCollection)
+
+    public static IrregularVerbCollection GetIreggularVerbs(string name)
+    {
+        IrregularVerbCollection verbsCollection = new IrregularVerbCollection();
+        currentPath = $"{directoryName}\\{name}{path}";
+        if (File.Exists(currentPath))
+        {
+            verbsCollection.ReadFile(currentPath);
+        }
+        else
+        {
+            Directory.CreateDirectory(directoryName);
+            File.Create(currentPath).Close();
+            AddVerbs(verbsCollection);
+            verbsCollection.ToFile((currentPath));
+        }
+        return verbsCollection;
+    }
+
+    private static void AddVerbs(IrregularVerbCollection verbsCollection)
     {
         verbsCollection.Add(new IrregularVerb("Быть", "Be", "Was, Were", "Been", 0));
         verbsCollection.Add(new IrregularVerb("Становиться", "Become", "Became", "Become", 0));
@@ -94,7 +114,7 @@ public partial class App
         verbsCollection.Add(new IrregularVerb("Знать", "Know", "Knew", "Known", 0));
         verbsCollection.Add(new IrregularVerb("Лежать", "Lay", "Laid", "Laid", 0));
         verbsCollection.Add(new IrregularVerb("Вести", "Lead", "Led", "Led", 0));
-        verbsCollection.Add(new IrregularVerb("Покидать","Leave", "Left", "Left", 0));
+        verbsCollection.Add(new IrregularVerb("Покидать", "Leave", "Left", "Left", 0));
         verbsCollection.Add(new IrregularVerb("Одолжить", "Lend", "Lent", "Lent", 0));
         verbsCollection.Add(new IrregularVerb("Разрешить", "Let", "Let", "Let", 0));
         verbsCollection.Add(new IrregularVerb("Лгать", "Lie", "Lie", "Lie", 0));
@@ -129,7 +149,7 @@ public partial class App
         verbsCollection.Add(new IrregularVerb("Спать", "Sleep", "Slept", "Slept", 0));
         verbsCollection.Add(new IrregularVerb("Скользить", "Slide", "Slid", "Slid", 0));
         verbsCollection.Add(new IrregularVerb("Беседовать", "Speak", "Spoke", "Spoken", 0));
-        verbsCollection.Add(new IrregularVerb("Проводить", "Spend", "Spent", "Spent", 0)); 
+        verbsCollection.Add(new IrregularVerb("Проводить", "Spend", "Spent", "Spent", 0));
         verbsCollection.Add(new IrregularVerb("Плевать", "Spit", "Spat", "Spat", 0));
         verbsCollection.Add(new IrregularVerb("Трескаться", "Split", "Split", "Split", 0));
         verbsCollection.Add(new IrregularVerb("Распространяться", "Spread", "Spread", "Spread", 0));

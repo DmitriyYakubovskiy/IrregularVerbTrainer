@@ -1,4 +1,4 @@
-﻿namespace IrregularVerbTrainer.DataAccess.Models;
+﻿namespace IrregularVerbTrainer.DataAccess.Enums;
 
 public enum Difficult
 {

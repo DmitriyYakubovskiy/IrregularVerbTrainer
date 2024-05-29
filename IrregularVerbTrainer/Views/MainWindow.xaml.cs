@@ -1,4 +1,6 @@
-﻿namespace IrregularVerbTrainer.Views;
+﻿using System.Windows;
+
+namespace IrregularVerbTrainer.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

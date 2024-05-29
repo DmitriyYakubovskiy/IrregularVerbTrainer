@@ -27,12 +27,15 @@
     </Window.Resources>
     <Grid>
         <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Аккаунт">
+                <MenuItem Header="Выйти" Command="{Binding OutCommand}"/>
+            </MenuItem>
             <MenuItem Header="Сложность">
                 <MenuItem Header="Легкая" Command="{Binding SetEasyCommand}"/>
                 <MenuItem Header="Средняя" Command="{Binding SetMediumCommand}"/>
                 <MenuItem Header="Сложная" Command="{Binding SetHardCommand}"/>
             </MenuItem>
-            <MenuItem Header="Показать">
+            <MenuItem Header="Окна">
                 <MenuItem Header="Список неправильных глаголов" Command="{Binding OpenListCommand}"/>
             </MenuItem>
         </Menu>
@@ -55,8 +58,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StringDifficult}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StringDifficult}"/>
             </Grid>
             <Button Grid.Column="1" Grid.Row="1" FontSize="40" Content="Начать тест" Command="{Binding OpenTestCommand}" Padding="10"/>
         </Grid>

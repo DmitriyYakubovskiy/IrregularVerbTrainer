@@ -1,4 +1,5 @@
 ﻿using IrregularVerbTrainer.Commands;
+using IrregularVerbTrainer.DataAccess.Enums;
 using IrregularVerbTrainer.DataAccess.Models;
 using IrregularVerbTrainer.Views;
 using System;

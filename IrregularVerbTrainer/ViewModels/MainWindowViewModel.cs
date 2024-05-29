@@ -1,8 +1,10 @@
 ﻿using IrregularVerbTrainer.Commands;
+using IrregularVerbTrainer.DataAccess.Enums;
 using IrregularVerbTrainer.DataAccess.Models;
 using IrregularVerbTrainer.Views;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -12,6 +14,7 @@ namespace IrregularVerbTrainer.ViewModels;
 
 public class MainWindowViewModel:INotifyPropertyChanged
 {
+    public ICommand OutCommand => outCommand;
     public ICommand OpenListCommand => openListCommand;
     public ICommand OpenTestCommand => openTestCommand;
     public ICommand SetEasyCommand => setEasyCommand;
@@ -26,23 +29,36 @@ public class MainWindowViewModel:INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
+    public string Name
+    {
+        get => name;
+        set
+        {
+            name = value;
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private Difficult difficult;
     private readonly IrregularVerbCollection verbsCollection;
     private readonly Window window;
+    private readonly Command outCommand;
     private readonly Command openListCommand;
     private readonly Command openTestCommand;
     private readonly Command setEasyCommand;
     private readonly Command setMediumCommand;
     private readonly Command setHardCommand;
     private string stringDifficult;
+    private string name;
 
-    public MainWindowViewModel(IrregularVerbCollection verbsCollection, Window window)
+    public MainWindowViewModel(IrregularVerbCollection verbsCollection, Window window, string name)
     {
         this.verbsCollection = verbsCollection;
         this.window = window;
+        this.name = $"Имя: {name}";
+        outCommand = new DelegateCommand(_ => Out());
         openListCommand = new DelegateCommand(_ => OpenListIrregularVerbs());
         openTestCommand = new DelegateCommand(_ => OpenTest());
         setEasyCommand = new DelegateCommand(_ => SetEasy(),_=>CanSetEasy());
@@ -55,9 +71,9 @@ public class MainWindowViewModel:INotifyPropertyChanged
 
     public void OnWindowClosing(object sender, CancelEventArgs e)
     {
-        verbsCollection.ToFile(App.path);
+        verbsCollection.ToFile(App.currentPath);
     }
-
+    
     private void SetEasy()
     {
         difficult = Difficult.Easy;
@@ -89,6 +105,15 @@ public class MainWindowViewModel:INotifyPropertyChanged
     private bool CanSetHard()
     {
         return difficult != Difficult.Hard;
+    }
+
+    private void Out()
+    {
+        File.Delete(App.sessionPath);
+        var loginWindow = new LoginView();
+        loginWindow.DataContext = new LoginViewModel(loginWindow);
+        loginWindow.Show();
+        window.Close();
     }
 
     private void OpenListIrregularVerbs()

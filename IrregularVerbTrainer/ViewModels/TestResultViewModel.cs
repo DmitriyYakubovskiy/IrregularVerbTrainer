@@ -1,4 +1,4 @@
-﻿using IrregularVerbTrainer.DataAccess.Models;
+﻿using IrregularVerbTrainer.DataAccess.Enums;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -17,15 +17,12 @@ public class TestResultViewModel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public int Points
+    public string Points
     {
         get => points;
         set
         {
             points = value;
-            if (points > 75) Brush = new SolidColorBrush(Colors.Green);
-            if (points > 40 && points <= 75) Brush = new SolidColorBrush(Colors.Orange);
-            if (points <= 40) Brush = new SolidColorBrush(Colors.Red);
             OnPropertyChanged();
         }
     }
@@ -43,7 +40,7 @@ public class TestResultViewModel : INotifyPropertyChanged
 
     private SolidColorBrush brush;
     private readonly Window window;
-    private int points;
+    private string points;
     private string difficult="Сложность: ";
 
     public TestResultViewModel(Difficult difficult, int points, Window window)
@@ -60,7 +57,10 @@ public class TestResultViewModel : INotifyPropertyChanged
         {
             this.difficult += "Сложная";
         }
-        Points = points;
+        if (points > 75) Brush = new SolidColorBrush(Colors.Green);
+        if (points > 40 && points <= 75) Brush = new SolidColorBrush(Colors.Orange);
+        if (points <= 40) Brush = new SolidColorBrush(Colors.Red);
+        Points = $"{points}%";
         this.window = window;
         window.Closing += OnWindowClosing;
     }
